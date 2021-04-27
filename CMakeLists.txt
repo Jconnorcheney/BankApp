@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.17)
+project(BankApp)
+
+set(CMAKE_CXX_STANDARD 17)
+
+add_executable(BankApp main.cpp src/Application.h src/Application.cpp)
