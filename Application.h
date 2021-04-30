@@ -8,15 +8,19 @@
 using namespace std;
 class Application {
 public:
+    vector<string> bank;
+
     Application();
     virtual ~Application();
-    static vector<string> GetContents();
-    void AddGold(int goldValue);
-    void TakeGold(int goldValue);
-    int GuildBankTotal();
+    void SetBank(vector<string> bankVector);
+    vector<string> GetContents();
+    int AddGold(int totalGold);
+    int TakeGold(int totalGold);
+    void GuildBankTotal(int totalGold);
     void DisplayTransactions();
     void HelpMessage();
     void UpdateGuildBank();
+
 };
 
 
