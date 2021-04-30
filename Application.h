@@ -14,12 +14,13 @@ public:
     virtual ~Application();
     void SetBank(vector<string> bankVector);
     vector<string> GetContents();
-    int AddGold(int totalGold);
-    int TakeGold(int totalGold);
+    void AddGold(int totalGold);
+    void TakeGold(int totalGold);
     void GuildBankTotal(int totalGold);
     void DisplayTransactions();
     void HelpMessage();
     void UpdateGuildBank();
+    void RemovedLoggedEvents(string totalGold);
 
 };
 
