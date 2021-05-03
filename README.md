@@ -10,5 +10,5 @@ This application was developed as a little personal project to help keep a log o
 </p>
  <h3 align="center">Example of the -log argument, shows all of the transactions done to the bank.</h3>
 <p align="center">
-  <img src="https://github.com/Jconnorcheney/BankApp/blob/master/Images/logCommand.PNG">
+  <img src="https://github.com/Jconnorcheney/BankApp/blob/master/Images/logCommandUpdated.PNG">
 </p>
