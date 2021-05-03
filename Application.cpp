@@ -1,6 +1,6 @@
 #include "Application.h"
-#include <fstream>
 #include <iostream>
+#include <ctime>
 using namespace std;
 //deconstructor
 Application::~Application() {
@@ -52,7 +52,9 @@ void Application::SetBank(vector<string> bankVector) {
  * text file and updates the guild bank total. */
 void Application::AddGold(int goldTotal) {
     string note;
+    string formattedNote;
     int goldValue;
+    string yearFormat = GetDDMMYY();
     /* get gold value from user. */
     cout << "Enter gold value to add:";
     cin >> goldValue;
@@ -75,25 +77,26 @@ void Application::AddGold(int goldTotal) {
 
     /* combine the note + the gold value entered, add brackets around added value */
     note + char(goldValue);
-    note = note + " (+" + to_string(goldValue) + ")";
-
+    note = note + " (+" + to_string(goldValue) + ").";
+    /* added a dd/mm/yyyy stamp to the front of the note for some extra clarity */
+    formattedNote = yearFormat + note;
     /* new updated bank total (old total + entered value) */
     int newBankTotal = goldTotal + goldValue;
     cout << "Gold successfully added, new total of: " << newBankTotal << endl;
     /* replace the first line of the vector with new bank total */
     bank.at(0) = std::to_string(newBankTotal);
     /* add the note and value added to transaction log */
-    bank.push_back(note);
+    bank.push_back(formattedNote);
 }
 /* -w function, takes in two inputs from user, total gold added,
  * and reason for adding */
 void Application::TakeGold(int goldTotal) {
     /* This function is very similar to the Add function, comments only added
      * where logic differs */
-
     string note;
+    string formattedNote;
     int goldValue;
-
+    string yearFormat = GetDDMMYY();
     cout << "Enter gold value withdrawn:";
     cin >> goldValue;
     /* int validation, if the cin fails, promps you try again. */
@@ -121,12 +124,13 @@ void Application::TakeGold(int goldTotal) {
     getline(cin,note);
 
     note + char(goldValue);
-    note = note + " (-" + to_string(goldValue) + ")";
+    note = note + " (-" + to_string(goldValue) + ").";
+    formattedNote = yearFormat + note;
 
     int newBankTotal = goldTotal - goldValue;
     cout << "Gold successfully withdrawn, new total of: " << newBankTotal << endl;
     bank.at(0) = std::to_string(newBankTotal);
-    bank.push_back(note);
+    bank.push_back(formattedNote);
 }
 /* -t function, very simple. shows guild bank total gold. */
 void Application::GuildBankTotal(int totalGold) {
@@ -187,4 +191,17 @@ void Application::RemovedLoggedEvents(string totalGold) {
     }catch(std::exception const& e){
         cout << "Error writing results to file: " << e.what() << endl;
     }
+}
+
+string Application::GetDDMMYY() {
+    time_t currTime = time(0);
+    tm* currLocalTime = localtime(&currTime);
+    string ddmmyy;
+    int day = currLocalTime->tm_mday;
+    int month = currLocalTime->tm_mon + 1;
+    int year = (currLocalTime->tm_year+1900);
+
+    ddmmyy = to_string(day) + "/" + to_string(month) +
+            "/" + to_string(year) + ": ";
+    return ddmmyy;
 }

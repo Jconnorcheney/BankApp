@@ -5,6 +5,8 @@
 #include <sstream>
 #include <fstream>
 #include <string>
+#include <ctime>
+
 using namespace std;
 class Application {
 public:
@@ -21,6 +23,7 @@ public:
     void HelpMessage();
     void UpdateGuildBank();
     void RemovedLoggedEvents(string totalGold);
+    static string GetDDMMYY();
 
 };
 
